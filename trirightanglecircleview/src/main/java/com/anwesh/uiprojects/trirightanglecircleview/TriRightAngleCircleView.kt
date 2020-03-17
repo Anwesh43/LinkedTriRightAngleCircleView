@@ -185,4 +185,27 @@ class TriRightAngleCircleView(ctx : Context) : View(ctx) {
             curr.startUpdating(cb)
         }
     }
+
+    data class Renderer(var view : TriRightAngleCircleView) {
+
+        private val animator : Animator = Animator(view)
+        private val trac : TriRightAngleCircle = TriRightAngleCircle(0)
+        private val paint : Paint = Paint(Paint.ANTI_ALIAS_FLAG)
+
+        fun render(canvas : Canvas) {
+            canvas.drawColor(backColor)
+            trac.draw(canvas, paint)
+            animator.animate {
+                trac.update {
+                    animator.stop()
+                }
+            }
+        }
+
+        fun handleTap() {
+            trac.startUpdating {
+                animator.start()
+            }
+        }
+    }
 }
