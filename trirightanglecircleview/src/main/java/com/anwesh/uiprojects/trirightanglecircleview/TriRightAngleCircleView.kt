@@ -210,4 +210,13 @@ class TriRightAngleCircleView(ctx : Context) : View(ctx) {
             }
         }
     }
+
+    companion object {
+
+        fun create(activity : Activity) : TriRightAngleCircleView {
+            val view : TriRightAngleCircleView = TriRightAngleCircleView(activity)
+            activity.setContentView(view)
+            return view
+        }
+    }
 }
