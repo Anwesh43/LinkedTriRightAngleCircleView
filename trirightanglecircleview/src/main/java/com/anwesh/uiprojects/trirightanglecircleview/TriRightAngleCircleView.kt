@@ -57,3 +57,19 @@ fun Canvas.drawRALNode(i : Int, scale : Float, paint : Paint) {
     drawRightAngleLines(scale, size, paint)
     restore()
 }
+
+class TriRightAngleCircleView(ctx : Context) : View(ctx) {
+
+    override fun onDraw(canvas : Canvas) {
+
+    }
+
+    override fun onTouchEvent(event : MotionEvent) : Boolean {
+        when (event.action) {
+            MotionEvent.ACTION_DOWN -> {
+
+            }
+        }
+        return true
+    }
+}
