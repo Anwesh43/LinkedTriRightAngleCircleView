@@ -18,9 +18,9 @@ val strokeFactor : Float = 90f
 val sizeFactor : Float = 2.9f
 val foreColor : Int = Color.parseColor("#4CAF50")
 val backColor : Int = Color.parseColor("#BDBDBD")
-val delay : Long = 25
-val rFactor : Float = 6f
-val scGap : Float = 0.02f
+val delay : Long = 15
+val rFactor : Float = 2.8f
+val scGap : Float = 0.02f / lines
 
 fun Int.inverse() : Float = 1f / this
 fun Float.maxScale(i : Int, n : Int) : Float = Math.max(0f, this - i * n.inverse())
