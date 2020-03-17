@@ -45,7 +45,7 @@ fun Canvas.drawRightAngleLines(scale : Float, size : Float, paint : Paint) {
     }
 }
 
-fun Canvas.drawRALNode(i : Int, scale : Float, paint : Paint) {
+fun Canvas.drawTRACNode(i : Int, scale : Float, paint : Paint) {
     val w : Float = width.toFloat()
     val h : Float = height.toFloat()
     paint.color = foreColor
@@ -119,6 +119,47 @@ class TriRightAngleCircleView(ctx : Context) : View(ctx) {
             if (animated) {
                 animated = false
             }
+        }
+    }
+
+    data class TRACNode(var i : Int, val state : State = State()) {
+
+        private var next : TRACNode? = null
+        private var prev : TRACNode? = null
+
+        init {
+            addNeighbor()
+        }
+
+        fun addNeighbor() {
+            if (i < nodes - 1) {
+                next = TRACNode(i + 1)
+                next?.prev = this
+            }
+        }
+
+        fun draw(canvas : Canvas, paint : Paint) {
+            canvas.drawTRACNode(i, state.scale, paint)
+        }
+
+        fun update(cb : (Float) -> Unit) {
+            state.update(cb)
+        }
+
+        fun startUpdating(cb : () -> Unit) {
+            state.startUpdating(cb)
+        }
+
+        fun getNext(dir : Int, cb : () -> Unit) : TRACNode {
+            var curr : TRACNode? = prev
+            if (dir == 1) {
+                curr = next
+            }
+            if (curr != null) {
+                return curr
+            }
+            cb()
+            return this
         }
     }
 }
